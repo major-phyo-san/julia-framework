@@ -1,7 +1,22 @@
 {
   "name": "julia-framework",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "Julia is an Express based Node.js framework inspired by Laravel for developing MVC style Web apps",
+  "keywords": [
+    "node.js",
+    "express.js",
+    "mvc-framework",
+    "node-framework",
+    "mvc-pattern"
+  ],
+  "homepage": "https://github.com/major-phyo-san/julia-framework#readme",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Phyo Kyaw San (aka Major San)",
+    "email": "phyojupiter9@gmail.com",
+    "url": "https://facebook.com/major.phyosan"
+  },
+  "private": false,
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
@@ -10,7 +25,6 @@
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-handlebars": "^5.1.0",
     "http-errors": "~1.6.3",
