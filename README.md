@@ -1,6 +1,6 @@
-# Julia Framework (0.0.0 - alpha)
+# Julia Framework (0.0.1 - alpha)
 
-Julia is a Express based Node.js framework inspired by Laravel for developing web apps.
+Julia is an Express based Node.js framework inspired by Laravel for developing MVC style Web apps.
 
 ## Installation
 
@@ -25,5 +25,12 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+## Components
+Front end components are:
+- Handlebars for template engine
+- Modernizr.js for browser features detection
+- Normalize.css for consistent rendering of HTML elements
+
 ## License
 [APACHE LICENSE, VERSION 2.0](https://www.apache.org/licenses/LICENSE-2.0#apache-license-version-20)
+The project contains works from other open source projects that have their own license terms. Please see the respective license term for each component.
