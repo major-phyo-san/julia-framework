@@ -24,7 +24,7 @@ app.engine('hbs', hbs({
   extname:'.hbs'
 }));
 // cache templates in production
-if(envs.NODE_ENV === 'Production'){
+if(envs.NODE_ENV === 'production'){
   app.enable('view cache');
 }
 //=======================================================//
