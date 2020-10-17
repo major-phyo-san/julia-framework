@@ -23,6 +23,10 @@ app.engine('hbs', hbs({
   defaultLayout:'main',
   extname:'.hbs'
 }));
+// cache templates in production
+if(envs.NODE_ENV === 'Production'){
+  app.enable('view cache');
+}
 //=======================================================//
 
 // serve static assets
