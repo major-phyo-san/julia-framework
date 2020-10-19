@@ -44,7 +44,7 @@ if(app.get('env') === 'test'){
 }
 if(app.get('env') === 'production'){
   app.use(prodLogger({
-    path: __dirname + '/log/request.log'
+    path: __dirname + '/log/requests.log'
   }));
 }
 
