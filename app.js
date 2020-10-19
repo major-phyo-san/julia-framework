@@ -12,6 +12,7 @@ var envs = require('./config/config');
 
 // initialize Express and Handlebars
 var app = express();
+app.set('env', envs.NODE_ENV);
 var hbs = handlebars;
 
 //=======================================================//
@@ -24,7 +25,7 @@ app.engine('hbs', hbs({
   extname:'.hbs'
 }));
 // cache templates in production
-if(envs.NODE_ENV === 'production'){
+if(app.get('env') === 'production'){  
   app.enable('view cache');
 }
 //=======================================================//
@@ -68,7 +69,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = envs.NODE_ENV === 'development' ? err : {};
+  res.locals.error = app.get('env') === 'development' ? err : {};
   
   var statusCode = err.status || 500;
   res.status(statusCode);

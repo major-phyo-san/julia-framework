@@ -7,33 +7,18 @@
 var app = require('../app');
 var debug = require('debug')('boilerplate:server');
 var http = require('http');
+var cluster = require('cluster');
 
 // environment variables
 var envs = require('../config/config');
+const { env } = require('process');
 
 /**
- * Get port from environment and store in Express.
+ * Get host and port from environment and set the application url in Express.
  */
+
 var port = normalizePort(envs.NODE_PORT || '3000');
-app.set('port', port);
-
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
+var host = envs.NODE_HOST || 'localhost';
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
@@ -85,9 +70,71 @@ function onError(error) {
 
 function onListening() {
   //var addr = server.address();
-  var addr = envs.NODE_HOST
+  var addr = host;
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+}
+
+// start the server
+function startServer(host, port){
+  var url = envs.NODE_PROTOCOL + host + ':' + port;
+  app.set('url', url);
+  /**
+   * Create HTTP server.
+   */
+  
+  var server = http.createServer(app);
+
+  /**
+   * Listen on provided host and port, on all network interfaces.
+   */
+
+  server.listen(port, host, function () {    
+    console.log('Server running in ' + app.get('env') + ' mode on ' + app.get('url'));
+  });
+  server.on('error', onError);
+  server.on('listening', onListening);
+  
+}
+
+// start the server on every CPU core
+function startServerInCluster(){  
+  if(cluster.isMaster){
+    require('os').cpus().forEach(function () {
+      startWorker();
+    });
+
+    // log the disconnected worker, it will then be existed from the cluster
+    cluster.on('disconnect', function(worker){
+      console.log('CLUSTER: worker %d disconnected from the cluster', worker.id);
+    });
+
+    // an old worker dies (exits) from the cluster
+    cluster.on('exit', function(worker, code, signal){
+      console.log('CLUSTER: worker %d died with exit code %d (%s)', worker.id, code, signal);
+      // a new worker is created to replace it
+      startWorker();
+    });
+  }
+  else{
+    // start the server on a worker
+    startServer(host, port);       
+  }
+  
+}
+
+// create a worker in the cluster
+function startWorker(){
+  var worker = cluster.fork();
+  console.log('CLUSTER: worker %d started', worker.id);
+}
+
+if(process.argv[2] === 'cluster'){
+  startServerInCluster();
+}
+else{
+  startServer(host, port);
+  
 }
