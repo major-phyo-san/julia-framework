@@ -3,7 +3,8 @@ var handlebars = require('express-handlebars');
 var cookieParser = require('cookie-parser');
 
 var createError = require('http-errors');
-var logger = require('morgan');
+var devLogger = require('morgan');
+var prodLogger = require('express-logger');
 
 var path = require('path');
 
@@ -36,14 +37,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 //=======================================================//
 // setup app features
 if(app.get('env') === 'development'){
-  app.use(logger('dev'));
+  app.use(devLogger('dev'));
 }
 if(app.get('env') === 'test'){
-  app.use(logger('combined'));
+  app.use(devLogger('combined'));
 }
 if(app.get('env') === 'production'){
-  app.use(logger('tiny'));
+  app.use(prodLogger({
+    path: __dirname + '/log/request.log'
+  }));
 }
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
