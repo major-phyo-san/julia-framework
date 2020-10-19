@@ -35,7 +35,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //=======================================================//
 // setup app features
-app.use(logger('common'));
+if(app.get('env') === 'development'){
+  app.use(logger('dev'));
+}
+if(app.get('env') === 'test'){
+  app.use(logger('combined'));
+}
+if(app.get('env') === 'production'){
+  app.use(logger('tiny'));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
