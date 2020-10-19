@@ -33,6 +33,14 @@ if(app.get('env') === 'production'){
 // serve static assets
 app.use(express.static(path.join(__dirname, 'public')));
 
+//=======================================================//
+// setup app features
+app.use(logger('common'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+//=======================================================//
+
 // import routes
 var indexRouter = require('./routes/web/index');
 var usersRouter = require('./routes/web/users');
@@ -42,11 +50,6 @@ var usersRouter = require('./routes/web/users');
 app.use(indexRouter);
 app.use(usersRouter);
 //=======================================================//
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 // catch 404 and render the error page
 app.use(function(req, res, next) {
