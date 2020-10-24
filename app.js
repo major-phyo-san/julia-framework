@@ -1,10 +1,14 @@
+// express and express handlebars
 var express = require('express');
 var handlebars = require('express-handlebars');
+
 var cookieParser = require('cookie-parser');
 
+// for HTTP requests logging
+var devLogger = require('morgan'); // development logger
+var prodLogger = require('express-logger'); // production logger
+
 var createError = require('http-errors');
-var devLogger = require('morgan');
-var prodLogger = require('express-logger');
 
 var path = require('path');
 
@@ -17,7 +21,9 @@ app.set('env', envs.NODE_ENV);
 var hbs = handlebars;
 
 //=======================================================//
-// view engine setup with Handlebars
+// view engine setup section
+
+// Handlebars setup
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '/app/views'));
 app.engine('hbs', hbs({  
@@ -25,6 +31,7 @@ app.engine('hbs', hbs({
   defaultLayout:'main',
   extname:'.hbs'
 }));
+
 // cache templates in production
 if(app.get('env') === 'production'){  
   app.enable('view cache');
@@ -35,7 +42,8 @@ if(app.get('env') === 'production'){
 app.use(express.static(path.join(__dirname, 'public')));
 
 //=======================================================//
-// setup app features
+// app features setup section
+
 if(app.get('env') === 'development'){
   app.use(devLogger('dev'));
 }
@@ -53,11 +61,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //=======================================================//
 
+//=======================================================//
+// routing section
+
 // import routes
 var indexRouter = require('./routes/web/index');
 var usersRouter = require('./routes/web/users');
 
-//=======================================================//
+
 // use imported routes
 app.use(indexRouter);
 app.use(usersRouter);
