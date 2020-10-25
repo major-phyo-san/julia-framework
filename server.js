@@ -14,6 +14,7 @@ var path = require('path');
 
 // import configs
 var envs = require('./config/server-env');
+var credentials = require('./config/credentials');
 
 // initialize Express and Handlebars
 var server = express();
@@ -58,7 +59,7 @@ if(server.get('env') === 'production'){
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
-server.use(cookieParser());
+server.use(cookieParser(credentials.cookieSecret)); // encrypt cookies with cookieSecret
 //=======================================================//
 
 //=======================================================//
@@ -67,7 +68,6 @@ server.use(cookieParser());
 // import routes
 var indexRouter = require('./routes/web/index');
 var usersRouter = require('./routes/web/users');
-
 
 // use imported routes
 server.use(indexRouter);
@@ -99,7 +99,7 @@ server.use(function(err, req, res, next) {
   
   var statusCode = err.status || 500;
   res.status(statusCode);
-  var msg = statusCode + 'Internal server error';
+  var msg = statusCode + ' Internal server error';
 
   if (req.accepts() == 'application/json') {
     res.send({

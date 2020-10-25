@@ -52,10 +52,15 @@ Front end components are:
 - Error handling with error pages
 
 0.0.2 (18-10-2020)
-- Sidebars logic added to templting system
+- Sidebars logic added to templating system
 - Express server can now be run in cluster
 - Environment specific behaviors introduced
 - Proper HTTP requests logging with morgan (dev) and express-logger (prod)
+
+0.0.3 (25-10-2020)
+- Entry file app.js renamed to server.js
+- Environment variable discovery file config.js renamed to server-env.js
+- Cookie secrecy logic added
 
 ## License
 
