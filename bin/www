@@ -10,7 +10,7 @@ var http = require('http');
 var cluster = require('cluster');
 
 // environment variables
-var envs = require('../config/config');
+var envs = require('../config/server-env');
 
 /**
  * Get host and port from environment and set the application url in Express.

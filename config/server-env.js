@@ -1,4 +1,5 @@
-// config.js
+// server-env.js
+// this file is responsible for easy discovery of environment variables for the server
 const dotenv = require('dotenv');
 const result = dotenv.config();
 if (result.error) {

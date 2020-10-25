@@ -13,7 +13,7 @@ var createError = require('http-errors');
 var path = require('path');
 
 // import configs
-var envs = require('./config/config');
+var envs = require('./config/server-env');
 
 // initialize Express and Handlebars
 var server = express();
