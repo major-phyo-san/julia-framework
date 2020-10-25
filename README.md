@@ -1,4 +1,4 @@
-# Julia Framework (0.0.2 - alpha)
+# Julia Framework (0.0.3 - alpha)
 
 Julia is an Express based Node.js framework inspired by Laravel for developing MVC style Web apps.
 
