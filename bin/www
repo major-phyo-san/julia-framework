@@ -4,14 +4,13 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var server = require('../server');
 var debug = require('debug')('boilerplate:server');
 var http = require('http');
 var cluster = require('cluster');
 
 // environment variables
 var envs = require('../config/config');
-const { env } = require('process');
 
 /**
  * Get host and port from environment and set the application url in Express.
@@ -78,24 +77,24 @@ function onListening() {
 }
 
 // start the server
-function startServer(host, port){
+function startServer(port, host){
   var url = envs.NODE_PROTOCOL + host + ':' + port;
-  app.set('url', url);
+  server.set('url', url);
   /**
    * Create HTTP server.
    */
   
-  var server = http.createServer(app);
+  var httpServer = http.createServer(server);
 
   /**
    * Listen on provided host and port, on all network interfaces.
    */
 
-  server.listen(port, host, function () {    
-    console.log('Server running in ' + app.get('env') + ' mode on ' + app.get('url'));
+  httpServer.listen(port, host, function () {    
+    console.log('Server running in ' + server.get('env') + ' mode on ' + server.get('url'));
   });
-  server.on('error', onError);
-  server.on('listening', onListening);
+  httpServer.on('error', onError);
+  httpServer.on('listening', onListening);
   
 }
 
@@ -120,7 +119,7 @@ function startServerInCluster(){
   }
   else{
     // start the server on a worker
-    startServer(host, port);       
+    startServer(port, host);
   }
   
 }
@@ -135,6 +134,6 @@ if(process.argv[2] === 'cluster'){
   startServerInCluster();
 }
 else{
-  startServer(host, port);
+  startServer(port, host);
   
 }

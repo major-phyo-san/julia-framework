@@ -16,49 +16,49 @@ var path = require('path');
 var envs = require('./config/config');
 
 // initialize Express and Handlebars
-var app = express();
-app.set('env', envs.NODE_ENV);
+var server = express();
+server.set('env', envs.NODE_ENV);
 var hbs = handlebars;
 
 //=======================================================//
 // view engine setup section
 
 // Handlebars setup
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, '/app/views'));
-app.engine('hbs', hbs({  
+server.set('view engine', 'hbs');
+server.set('views', path.join(__dirname, '/app/views'));
+server.engine('hbs', hbs({  
   layoutsDir:path.join(__dirname, '/app/views/layouts'), 
   defaultLayout:'main',
   extname:'.hbs'
 }));
 
 // cache templates in production
-if(app.get('env') === 'production'){  
-  app.enable('view cache');
+if(server.get('env') === 'production'){  
+  server.enable('view cache');
 }
 //=======================================================//
 
 // serve static assets
-app.use(express.static(path.join(__dirname, 'public')));
+server.use(express.static(path.join(__dirname, 'public')));
 
 //=======================================================//
-// app features setup section
+// server features setup section
 
-if(app.get('env') === 'development'){
-  app.use(devLogger('dev'));
+if(server.get('env') === 'development'){
+  server.use(devLogger('dev'));
 }
-if(app.get('env') === 'test'){
-  app.use(devLogger('combined'));
+if(server.get('env') === 'test'){
+  server.use(devLogger('combined'));
 }
-if(app.get('env') === 'production'){
-  app.use(prodLogger({
+if(server.get('env') === 'production'){
+  server.use(prodLogger({
     path: __dirname + '/log/requests.log'
   }));
 }
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+server.use(express.json());
+server.use(express.urlencoded({ extended: false }));
+server.use(cookieParser());
 //=======================================================//
 
 //=======================================================//
@@ -70,15 +70,15 @@ var usersRouter = require('./routes/web/users');
 
 
 // use imported routes
-app.use(indexRouter);
-app.use(usersRouter);
+server.use(indexRouter);
+server.use(usersRouter);
 //=======================================================//
 
 // catch 404 and render the error page
-app.use(function(req, res, next) {
+server.use(function(req, res, next) {
   res.status(404);
   var msg = '404 Not found';
-  if (req.accepts() == 'application/json') {
+  if (req.accepts() == 'serverlication/json') {
     res.send({
       'isSuccess': false,
       'message': 'error occured',
@@ -92,16 +92,16 @@ app.use(function(req, res, next) {
 });
 
 // catch 500 error and render the error page
-app.use(function(err, req, res, next) {
+server.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = app.get('env') === 'development' ? err : {};
+  res.locals.error = server.get('env') === 'development' ? err : {};
   
   var statusCode = err.status || 500;
   res.status(statusCode);
   var msg = statusCode + ' Server error';
 
-  if (req.accepts() == 'application/json') {
+  if (req.accepts() == 'serverlication/json') {
     res.send({
       'isSuccess': false,
       'message': 'error occured',
@@ -114,4 +114,4 @@ app.use(function(err, req, res, next) {
   }
 });
 
-module.exports = app;
+module.exports = server;
