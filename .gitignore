@@ -2,5 +2,5 @@
 
 .env
 *.log
-
+credentials.js
 julia.code-workspace

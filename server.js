@@ -78,9 +78,9 @@ server.use(usersRouter);
 server.use(function(req, res, next) {
   res.status(404);
   var msg = '404 Not found';
-  if (req.accepts() == 'serverlication/json') {
+  if (req.accepts() == 'application/json') {
     res.send({
-      'isSuccess': false,
+      'success': false,
       'message': 'error occured',
       'error type': msg
     });
@@ -99,11 +99,11 @@ server.use(function(err, req, res, next) {
   
   var statusCode = err.status || 500;
   res.status(statusCode);
-  var msg = statusCode + ' Server error';
+  var msg = statusCode + 'Internal server error';
 
-  if (req.accepts() == 'serverlication/json') {
+  if (req.accepts() == 'application/json') {
     res.send({
-      'isSuccess': false,
+      'success': false,
       'message': 'error occured',
       'error type': msg
     });
