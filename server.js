@@ -63,7 +63,8 @@ if(server.get('env') === 'production'){
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
-server.use(cookieParser(credentials.cookieSecret)); // encrypt cookies with cookieSecret
+// encrypt cookies with cookie secret key from env
+server.use(cookieParser(envs.NODE_COOKIES_SECRET));
 //=======================================================//
 
 //=======================================================//
