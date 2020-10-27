@@ -39,6 +39,10 @@ if(server.get('env') === 'production'){
 }
 //=======================================================//
 
+// deal with uncaught error
+var handlerUncaught = require('./app/controllers/middlewares/ErrorHandlers/uncaughtErrorHandler');
+server.use(handlerUncaught);
+
 // serve static assets
 server.use(express.static(path.join(__dirname, 'public')));
 
@@ -74,44 +78,22 @@ server.use(indexRouter);
 server.use(usersRouter);
 //=======================================================//
 
-// catch 404 and render the error page
-server.use(function(req, res, next) {
-  res.status(404);
-  var msg = '404 Not found';
-  if (req.accepts() == 'application/json') {
-    res.send({
-      'success': false,
-      'message': 'error occured',
-      'error type': msg
-    });
-  }
-
-  else {
-    res.render('errorpages/error', { errorMsg: msg });
-  }
+server.get('/fail', function(req, res){
+  process.nextTick(function(){
+    throw new Error('Kaboom');
+  });
 });
+
+//=======================================================//
+// error handling section
+var handler404 = require('./app/controllers/middlewares/ErrorHandlers/notFoundErrorHandler');
+var handler500 = require('./app/controllers/middlewares/ErrorHandlers/serverErrorHandler');
+
+// catch 404 and render the error page
+server.use(handler404);
 
 // catch 500 error and render the error page
-server.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = server.get('env') === 'development' ? err : {};
-  
-  var statusCode = err.status || 500;
-  res.status(statusCode);
-  var msg = statusCode + ' Internal server error';
-
-  if (req.accepts() == 'application/json') {
-    res.send({
-      'success': false,
-      'message': 'error occured',
-      'error type': msg
-    });
-  }
-
-  else {
-    res.render('errorpages/error', { errorMsg: msg });
-  }
-});
+server.use(handler500);
+//=======================================================//
 
 module.exports = server;
