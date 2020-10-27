@@ -14,7 +14,6 @@ var path = require('path');
 
 // import configs
 var envs = require('./config/server-env');
-var credentials = require('./config/credentials');
 
 // initialize Express and Handlebars
 var server = express();
