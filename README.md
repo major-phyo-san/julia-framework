@@ -57,10 +57,11 @@ Front end components are:
 - Environment specific behaviors introduced
 - Proper HTTP requests logging with morgan (dev) and express-logger (prod)
 
-0.0.3 (25-10-2020)
+0.0.3 (27-10-2020)
 - Entry file app.js renamed to server.js
 - Environment variable discovery file config.js renamed to server-env.js
-- Cookie secrecy logic added
+- Cookie secrecy key in env files
+- Error handlers sepearated as middlewares
 
 ## License
 
