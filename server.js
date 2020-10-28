@@ -78,12 +78,6 @@ server.use(indexRouter);
 server.use(usersRouter);
 //=======================================================//
 
-server.get('/fail', function(req, res){
-  process.nextTick(function(){
-    throw new Error('Kaboom');
-  });
-});
-
 //=======================================================//
 // error handling section
 var handler404 = require('./app/controllers/middlewares/ErrorHandlers/notFoundErrorHandler');
