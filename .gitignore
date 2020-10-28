@@ -1,6 +1,5 @@
 /node_modules
 
 .env
-*.log
-credentials.js
-julia.code-workspace
+
+*.code-workspace
