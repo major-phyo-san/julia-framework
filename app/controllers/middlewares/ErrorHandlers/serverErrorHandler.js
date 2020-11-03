@@ -1,3 +1,6 @@
+// this middleware module handles server errors
+// created on 27-10-2020
+
 var express = require('express');
 var server = express();
 

@@ -1,3 +1,6 @@
+// this middleware module handles unknown errors
+// created on 27-10-2020
+
 var http = require('http');
 var express = require('express');
 var server = express();
