@@ -66,6 +66,7 @@ Front end components are:
 0.0.4 (03-11-2020)
 - Multer file upload module built in config
 - Random string generator added in config
+- CSRF protection added
 
 ## License
 
