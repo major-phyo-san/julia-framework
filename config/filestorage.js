@@ -3,6 +3,7 @@
 
 var multer = require('multer');
 var path = require('path');
+var fs = require('fs');
 var stringGenerator = require('./randomstrings');
 
 // defines root for the uploaded files (storage root)
@@ -17,7 +18,10 @@ var makeFileStorage = function(dir){
     
     var storage = multer.diskStorage({
         destination: function(req, file, cb){
-            // uploaded files will be stored in the storage root plus user provided 'dir' directory
+            // create user provided directory if not exists
+            fs.mkdirSync(relativeDir, {recursive: true});
+
+            // uploaded files will be stored in the storage root plus user provided 'dir' directory            
             cb(null, relativeDir);
         },
         filename:function(req, file,cb){
