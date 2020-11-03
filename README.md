@@ -1,4 +1,4 @@
-# Julia Framework (0.0.3 - alpha)
+# Julia Framework (0.0.4 - alpha)
 
 Julia is an Express based Node.js framework inspired by Laravel for developing MVC style Web apps.
 
@@ -62,6 +62,10 @@ Front end components are:
 - Environment variable discovery file config.js renamed to server-env.js
 - Cookie secrecy key in env files
 - Error handlers sepearated as middlewares
+
+0.0.4 (03-11-2020)
+- Multer file upload module built in config
+- Random string generator added in config
 
 ## License
 
