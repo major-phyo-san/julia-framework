@@ -78,60 +78,6 @@ server.use(indexRouter);
 server.use(usersRouter);
 //=======================================================//
 
-var multer = require('multer');
-var makeFileStorage = require('./config/filestorage');
-var storage = multer.diskStorage({
-  destination:function(req, file, cb){
-    cb(null, './storage/app');
-  },
-  filename:function(req, file,cb){
-    cb(null, file.originalname);
-  }
-});
-
-var upload = multer({storage:storage});
-
-var storage1 = makeFileStorage('/');
-var upload1 = multer({storage:storage1});
-
-var storage2 = makeFileStorage('public');
-var upload2 = multer({storage:storage2});
-
-server.post('/fu1', upload1.single('file'), (req,res)=>{
-  console.log(req.file.path);
-  try{
-    res.send(req.file);
-  }
-  catch(err){
-    res.send(400);
-  }
-});
-
-//console.log(storage);
-// console.log(upload);
-
-// console.log(upload2);
-
-server.post('/fu2', upload2.single('file'), (req,res)=>{
-  console.log(req.file.path);
-  try{
-    res.send(req.file);
-  }
-  catch(err){
-    res.send(400);
-  }
-});
-
-server.post('/fu', upload.single('file'), (req, res) => {
-  console.log(req.file.path);
-  try{
-    res.send(req.file);
-  }
-  catch(err){
-    res.send(400);
-  }
-});
-
 //=======================================================//
 // error handling section
 var handler404 = require('./app/controllers/middlewares/ErrorHandlers/notFoundErrorHandler');
