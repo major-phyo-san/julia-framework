@@ -64,6 +64,11 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 // encrypt cookies with cookie secret key from env
 server.use(cookieParser(envs.NODE_COOKIES_SECRET));
+server.use(require('csurf')());
+server.use(function(req, res, next){
+  res.locals._csrfToken = req.csrfToken();
+  next();
+});
 //=======================================================//
 
 //=======================================================//
