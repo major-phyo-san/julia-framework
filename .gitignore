@@ -1,5 +1,6 @@
 /node_modules
+/storage/app
+/storage/app/public
 
 .env
-
 *.code-workspace
