@@ -4,7 +4,7 @@
 var multer = require('multer');
 var path = require('path');
 var fs = require('fs');
-var stringGenerator = require('./randomstrings');
+var stringGenerator = require('../utilities/randomStringGenerator');
 
 // defines root for the uploaded files (storage root)
 const baseDir = './storage/app';
