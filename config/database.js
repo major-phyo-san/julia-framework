@@ -1,10 +1,10 @@
+// this module provides storage option for multer file uploads
+// created on 08-11-2020
+
 var mongoose = require('mongoose');
 var envs = require('./server-env');
 
-var options = {
-    server: {
-        socketOptions: {keepAlive: 1}
-    },
+var options = {    
     useNewUrlParser: true,
     useUnifiedTopology: true
 };
