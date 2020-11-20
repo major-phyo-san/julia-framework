@@ -1,4 +1,4 @@
-// this module generates random strings based on the 'length' value
+// this module generates a random string based on the 'length' value
 // created on 03-11-2020
 
 var generator = function (length) {
