@@ -1,4 +1,4 @@
-# Julia Framework (0.0.4 - alpha)
+# Julia Framework (0.0.5 - alpha)
 
 Julia is an Express based Node.js framework inspired by Laravel for developing MVC style Web apps.
 
@@ -66,7 +66,14 @@ Front end components are:
 0.0.4 (03-11-2020)
 - Multer file upload module built in config
 - Random string generator added in config
-- CSRF protection added
+- CSRF protection with CSURF added
+
+0.0.5 (20-11-2020)
+- Mongoose for MongoDB database connection module built in config
+- App refactored for Express-WS websocket support
+- CSRF protection error fixed
+- Dependencies loading re-structured
+- random generators in utilities directory
 
 ## License
 
