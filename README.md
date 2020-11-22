@@ -1,6 +1,7 @@
 # Julia Framework (0.0.5 - alpha)
 
 Julia is an Express based Node.js framework inspired by Laravel for developing MVC style Web apps.
+Please, remove or rewrite this readme file after cloning and building Julia-based projects. Also, modify package.json file according to the particular project's needs.
 
 ## Installation
 
@@ -29,7 +30,7 @@ Please make sure to update tests as appropriate.
 ## Components
 
 Back end components are:
-- Handlebars for template engine
+- Express Handlebars for template engine
 - Morgan and Express-Logger for requests logging
 - Cluster for cluster servers
 
@@ -61,7 +62,7 @@ Front end components are:
 - Entry file app.js renamed to server.js
 - Environment variable discovery file config.js renamed to server-env.js
 - Cookie secrecy key in env files
-- Error handlers sepearated as middlewares
+- Error handlers seperated as middlewares
 
 0.0.4 (03-11-2020)
 - Multer file upload module built in config
@@ -74,6 +75,7 @@ Front end components are:
 - CSRF protection error fixed
 - Dependencies loading re-structured
 - random generators in utilities directory
+- Single routing files (web.js and api.js) for Web and API routes
 
 ## License
 
