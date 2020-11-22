@@ -95,12 +95,10 @@ app.use(function(req, res, next){
 // routing section
 
 // import routes
-var indexRouter = require('./routes/web/index');
-var usersRouter = require('./routes/web/users');
-
-// use imported routes
-app.use(indexRouter);
-app.use(usersRouter);
+var webRouter = require('./routes/web');
+var apiRouter = require('./routes/api');
+app.use(webRouter);
+app.use(apiRouter);
 
 //=======================================================//
 
