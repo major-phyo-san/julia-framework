@@ -58,9 +58,6 @@ if(app.get('env') === 'production'){
 var handlerUncaught = require('./app/controllers/middlewares/ErrorHandlers/uncaughtErrorHandler');
 app.use(handlerUncaught);
 
-// serve static assets
-app.use(express.static(path.join(__dirname, 'public')));
-
 //=======================================================//
 // app features setup section
 
@@ -90,6 +87,11 @@ app.use(function(req, res, next){
 });
 
 //=======================================================//
+
+// serve static assets in 'public' directory with '/public' in url
+app.get('/public*', function(req, res){
+  res.sendFile(process.cwd() + req.url);
+});
 
 //=======================================================//
 // routing section
