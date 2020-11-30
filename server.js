@@ -107,13 +107,13 @@ app.use(apiRouter);
 //=======================================================//
 // error handling section
 var handler404 = require('./app/controllers/middlewares/ErrorHandlers/notFoundErrorHandler');
-var handler500 = require('./app/controllers/middlewares/ErrorHandlers/serverErrorHandler');
+var handlerGeneral = require('./app/controllers/middlewares/ErrorHandlers/generalErrorHandler');
 
 // catch 404 and render the error page
 app.use(handler404);
 
-// catch 500 error and render the error page
-app.use(handler500);
+// catch 500 and other errors and render the error page
+app.use(handlerGeneral);
 //=======================================================//
 
 module.exports = app;
