@@ -77,6 +77,11 @@ Front end components are:
 - random generators in utilities directory
 - Single routing files (web.js and api.js) for Web and API routes
 
+0.0.6 (30-11-2020)
+- Serve static assets in 'public' directory with '/public' in url (Julia way)
+- Added meta tag for CSRF in main layout
+- 500 error handler to general error handler
+
 ## License
 
 [APACHE LICENSE, VERSION 2.0](https://www.apache.org/licenses/LICENSE-2.0#apache-license-version-20)
