@@ -3,17 +3,19 @@
 
 handler = function(req, res, next){
     res.status(404);
-    var msg = '404 Not found';
+    var errorCode = 404;
+    var errorMessage = 'Page not found, sorry';
+    
     if (req.accepts() == 'application/json') {
       res.send({
         'success': false,
-        'message': 'error occured',
-        'error type': msg
+        'errorMessage': errorMessage,
+        'errorCode': errorCode
       });
     }
   
     else {
-      res.render('errorpages/error', { errorMsg: msg });
+      res.render('errorpages/error', { errorMessage: errorMessage, errorCode: errorCode });
     }
 }
 
