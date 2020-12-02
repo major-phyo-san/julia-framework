@@ -1,4 +1,4 @@
-# Julia Framework (0.0.5 - alpha)
+# Julia Framework (0.0.7 - alpha)
 
 Julia is an Express based Node.js framework inspired by Laravel for developing MVC style Web apps.
 Please, remove or rewrite this readme file after cloning and building Julia-based projects. Also, modify package.json file according to the particular project's needs.
@@ -67,20 +67,26 @@ Front end components are:
 0.0.4 (03-11-2020)
 - Multer file upload module built in config
 - Random string generator added in config
-- CSRF protection with CSURF added
+- Added CSRF protection with CSURF
 
 0.0.5 (20-11-2020)
 - Mongoose for MongoDB database connection module built in config
 - App refactored for Express-WS websocket support
 - CSRF protection error fixed
 - Dependencies loading re-structured
-- random generators in utilities directory
+- Random generators in utilities directory
 - Single routing files (web.js and api.js) for Web and API routes
 
 0.0.6 (30-11-2020)
 - Serve static assets in 'public' directory with '/public' in url (Julia way)
 - Added meta tag for CSRF in main layout
 - 500 error handler to general error handler
+
+0.0.7 (02-12-2020)
+- Database config re-structured
+- File storage config re-structured
+- Added method overriding with Method-Override
+- Deleted '/tests' dir for routes
 
 ## License
 
