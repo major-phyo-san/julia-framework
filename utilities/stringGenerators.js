@@ -1,7 +1,7 @@
 // this module generates a random string based on the 'length' value
 // created on 03-11-2020
 
-var generator = function (length) {
+module.exports.generateRandomString = function (length) {
    // result will be the generated string
    var result = '';
 
@@ -15,5 +15,3 @@ var generator = function (length) {
    }
    return result;
 }
-
-module.exports = generator;
