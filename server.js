@@ -78,7 +78,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // encrypt cookies with cookie secret key from env
-app.use(cookieParser(envs.NODE_COOKIES_SECRET));
+app.use(cookieParser(envs.NODE_KEY));
 
 // add CSRF token guard to app
 // check for value in '_csrf' attribute of hidden inputs
