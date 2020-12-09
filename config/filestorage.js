@@ -5,7 +5,7 @@
 var multer = require('multer');
 var path = require('path');
 var fs = require('fs');
-var stringGenerator = require('../utilities/randomStringGenerator');
+var stringGenerator = require('../utilities/stringGenerators');
 
 // defines root for the uploaded files (storage root)
 const baseDir = './storage/app';
@@ -27,7 +27,7 @@ module.exports.makeMulterStorage = function(dir){
         },
         filename:function(req, file,cb){
             // we'll rename every file with the 3 chunks of 5-character strings
-            var randomFileName = stringGenerator(5) + '_' + stringGenerator(5) + '_' + stringGenerator(5);
+            var randomFileName = stringGenerator.generateRandomString(5)  + '_' + stringGenerator.generateRandomString(5) + '_' + stringGenerator.generateRandomString(5);
             cb(null, randomFileName + path.extname(file.originalname));
           }
     });
