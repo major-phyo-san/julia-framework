@@ -1,9 +1,11 @@
 const readline = require('readline');
 const fs = require('fs');
 const stringGenerator = require('./utilities/stringGenerators');
+const cryptography = require('./utilities/cryptography');
 
 var writeData = '';
 var generatedKey = stringGenerator.generateRandomString(30);
+generatedKey = cryptography.base64digest(generatedKey);
 
 const readInterface = readline.createInterface({
     input: fs.createReadStream('.env'),
