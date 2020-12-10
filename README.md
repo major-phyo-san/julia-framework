@@ -1,4 +1,4 @@
-# Julia Framework (0.0.7 - alpha)
+# Julia Framework (0.0.8 - alpha)
 
 Julia is an Express based Node.js framework inspired by Laravel for developing MVC style Web apps.
 Please, remove or rewrite this readme file after cloning and building Julia-based projects. Also, modify package.json file according to the particular project's needs.
@@ -16,6 +16,7 @@ git clone https://github.com/major-phyo-san/julia-framework
 ```bash
 npm install
 
+npm run keygen
 npm run start (or) npm run start cluster (cluster mode)
 npm run dev
 npm run debug
@@ -87,6 +88,19 @@ Front end components are:
 - File storage config re-structured
 - Added method overriding with Method-Override
 - Deleted '/tests' dir for routes
+
+0.0.8 (09-12-2020)
+- Refactored Env file
+- Refactored stringGenerators module for modular support
+- Added generateRandomString() in stringGenerators module
+- Added generateUUID() in stringGenerators module
+- Added keygen to automatically generate NODE_KEY in .ENV file
+- Fixed server.js for NODE_KEY env variable
+- Added 'npm run keygen' script in package.json
+- Fixed file storage randomFileName generation for new string generator module
+- Added cryptography module to provide shortened cryptographic functionalities
+- Added base64digest(), bcrypt() and debcrypt() in cryptography module
+- Refactored random numberGenerators module for modular support
 
 ## License
 

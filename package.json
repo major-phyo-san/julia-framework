@@ -1,6 +1,6 @@
 {
   "name": "julia-framework",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Julia is an Express based Node.js framework inspired by Laravel for developing MVC style Web apps",
   "keywords": [
     "node.js",
