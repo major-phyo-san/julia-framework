@@ -1,7 +1,7 @@
 // this module generates a random string based on the 'length' value
 // created on 03-11-2020
 
-var uuid = require('uuid');
+const uuid = require('uuid');
 
 module.exports.generateRandomString = function (length) {
    // result will be the generated string
