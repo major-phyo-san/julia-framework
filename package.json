@@ -24,6 +24,7 @@
     "keygen": "node keygen.js"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "cluster": "^0.7.7",
     "cookie-parser": "~1.4.4",
     "csurf": "^1.11.0",
