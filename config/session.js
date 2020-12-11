@@ -1,0 +1,19 @@
+// this module provides web sessions storage and retrieval
+// created on 11-12-2020
+
+const session = require('express-session');
+const cryptography = require('../utilities/cryptography');
+const stringGenerators = require('../utilities/stringGenerators');
+const envs = require('./server-env');
+
+
+module.exports.makeMemorySessions = function(){
+    var memorySession = session({
+        genid: function(req){
+            return stringGenerators.generateUUID(); // use UUIDs for session Ids
+        },
+        secret: envs.NODE_KEY,
+        resave: false,
+        saveUninitialized: true
+    });
+}
