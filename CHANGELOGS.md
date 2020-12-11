@@ -1,7 +1,8 @@
 ## Current Version
 
-Version code - 0.8.0
-Release date -
+- Version code - 0.8.0
+- Release date -
+
 
 ## Changelog
 
