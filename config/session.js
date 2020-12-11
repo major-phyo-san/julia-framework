@@ -4,6 +4,7 @@
 const session = require('express-session');
 const stringGenerators = require('../utilities/stringGenerators');
 const envs = require('./server-env');
+const FileStore = require('session-file-store')(session);
 
 module.exports.makeMemorySessions = function(){
     var memorySession = session({
@@ -16,4 +17,20 @@ module.exports.makeMemorySessions = function(){
     });
 
     return memorySession;
+}
+
+module.exports.makeFileSessions = function() {
+    var fileSession = session({
+        genid: function(req){
+            return stringGenerators.generateUUID();
+        },
+        secret: envs.NODE_KEY,
+        resave: false,
+        saveUninitialized: true,
+        store: new FileStore({
+            path: '../storage/framework/sessions'
+        })
+    });
+
+    return fileSession;
 }
