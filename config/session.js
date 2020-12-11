@@ -1,5 +1,6 @@
 // this module provides web sessions storage and retrieval
 // created on 11-12-2020
+
 const session = require('express-session');
 const stringGenerators = require('../utilities/stringGenerators');
 const envs = require('./server-env');
