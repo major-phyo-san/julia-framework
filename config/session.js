@@ -6,10 +6,13 @@ const stringGenerators = require('../utilities/stringGenerators');
 const envs = require('./server-env');
 const FileStore = require('session-file-store')(session);
 
+const sessionStorageDir = './storage/framework/sessions';
+
 module.exports.makeMemorySessions = function(){
     var memorySession = session({
         genid: function(req){
-            return stringGenerators.generateUUID(); // use UUIDs for session Ids
+            sessionId = stringGenerators.generateUUID();
+            return sessionId; // use UUIDs for session Ids
         },
         secret: envs.NODE_KEY,
         resave: false,
@@ -22,13 +25,14 @@ module.exports.makeMemorySessions = function(){
 module.exports.makeFileSessions = function() {
     var fileSession = session({
         genid: function(req){
-            return stringGenerators.generateUUID();
+            sessionId = stringGenerators.generateUUID();
+            return sessionId; // use UUIDs for session Ids
         },
         secret: envs.NODE_KEY,
         resave: false,
         saveUninitialized: true,
         store: new FileStore({
-            path: '../storage/framework/sessions'
+            path: sessionStorageDir
         })
     });
 
