@@ -13,6 +13,11 @@ var cookieParser = require('cookie-parser');
 var csrfGuard = require('csurf');
 var methodOverride = require('method-override');
 
+// load web session and auth configs
+const session = require('./config/session');
+const auth = require('./config/auth');
+const passport = auth.makePassportAuth();
+
 // for HTTP requests logging
 var developmentLogger = require('morgan');
 var productionLogger = require('express-logger');
@@ -99,6 +104,13 @@ app.use(methodOverride(function(req, res, next){
 }));
 // check 'X-HTTP-Method-Override' in Ajax request headers
 app.use(methodOverride('X-HTTP-Method-Override'));
+
+// add file-based web sessions
+app.use(session.makeFileSessions());
+
+// add Passport authentication
+app.use(passport.initialize());
+app.use(passport.session());
 
 //=======================================================//
 
