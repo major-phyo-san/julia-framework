@@ -1,0 +1,16 @@
+<form action="/register" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
+
+    <label for="name">User name:</label>
+    <input type="text" name="name" id="name"/> <br>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email"/> <br>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password"/> <br>
+
+    <label for="role">Role:</label>
+    <input type="text" name="role" id="role"/> <br>
+    <button type="submit">Register</button>
+</form>
