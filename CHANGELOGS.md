@@ -1,7 +1,7 @@
 ## Current Version
 
-- Version code - 0.8.0
-- Release date -
+- Version code - 0.9.0
+- Release date - 16.12.2020
 
 
 ## Changelog
@@ -66,3 +66,16 @@
 - Added cryptography module to provide shortened cryptographic functionalities
 - Added base64digest(), bcrypt() and debcrypt() in cryptography module
 - Refactored random numberGenerators module for modular support
+
+0.0.9 (16-12-2020)
+- Added session module
+- Added auth module
+- Refactor default error view
+- Refactor default error handler middlewares
+- Added default User model and schema
+- Added default auth views (Login and Register views)
+- Added default auth controllers (Login and Register controllers)
+- Added '/sessions' dir for storing file-based session files
+- Added nodemon config file
+- Deleted default user controller
+- Fixed default web routes
