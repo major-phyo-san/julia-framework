@@ -11,6 +11,9 @@ Clone the repo from github to your working directory.
 git clone https://github.com/major-phyo-san/julia-framework
 ```
 
+Rename .env.example file to .env.
+Write environment variables (server config settings) for your project in .env file.
+
 ## Usage
 
 ```bash
