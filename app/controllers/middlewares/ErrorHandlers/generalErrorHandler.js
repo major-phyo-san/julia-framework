@@ -14,6 +14,7 @@ handler = function (err, req, res, next) {
 
     var errorCode = err.status || 500;
     var errorMessage = '';
+    var err = {};
     res.status(errorCode);
     switch(errorCode){
         case 401:
@@ -48,16 +49,15 @@ handler = function (err, req, res, next) {
             break;
     }    
 
+    err["errorMessage"] = errorMessage;
+    err["errorCode"] = errorCode;
+    
     if (req.accepts() == 'application/json') {
-        res.send({
-            'success': false,
-            'errorMessage': errorMessage,
-            'errorCode': errorCode
-        });
+        res.send(err);
     }
 
     else {
-        res.render('errorpages/error', { errorMessage: errorMessage, errorCode: errorCode });
+        res.render('errorpages/error', err);
     }
 }
 

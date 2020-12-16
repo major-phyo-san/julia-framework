@@ -5,17 +5,13 @@ handler = function(req, res, next){
     res.status(404);
     var errorCode = 404;
     var errorMessage = 'Page not found, sorry';
-    
+    var err = {"errorMessage": errorMessage, "errorCode": errorCode};
     if (req.accepts() == 'application/json') {
-      res.send({
-        'success': false,
-        'errorMessage': errorMessage,
-        'errorCode': errorCode
-      });
+      res.send(err);
     }
   
     else {
-      res.render('errorpages/error', { errorMessage: errorMessage, errorCode: errorCode });
+      res.render('errorpages/error', err);
     }
 }
 
