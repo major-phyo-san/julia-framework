@@ -1,8 +1,9 @@
 // this module provides user authentication using Passport
-// created on 13-12-2020
+// created on 2020-12-13
 
 const database = require('./database');
 const cryptography = require('../utilities/cryptography');
+const envs = require('../config/server-env');
 const User = require('../app/models/User');
 
 const passport = require('passport');
@@ -27,34 +28,45 @@ module.exports.makePassportAuth = function(){
         function (email, password, done) {
             // inside local strategy callback
             var errorObj = {"message": "failed to authenticate user"};
-            console.log('authenticating user using local strtegy');
+            if(envs.NODE_ENV === 'development'){
+                console.log('authenticating user using local strtegy');
+            }            
     
             // query the database for user with provided credentials
             User.findOne({ email: email }, function (err, user) {
                 // database error
                 // local strategy returned false
                 if (err) {
-                    console.log('error occurred in authentication database');
+                    if(envs.NODE_ENV === 'development'){
+                        console.log('error occurred in authentication database');
+                    } 
+                    
                     errorObj["reason"] = "auth db err";
                     return done(errorObj, null);
                 }
     
                 // user found, provided password needs to be checked
                 // against the hashed (bcrypt) password stored in the db
-                if (user) {
-                    console.log('user found in db');
+                if (user) {                    
                     // checking the password
                     cryptography.debcrypt(password, user.password, function (match) {
                         // password check 'OK' 
                         // local strategy returned true
                         if (match) {
-                            console.log('valid password');
+                            if(envs.NODE_ENV === 'development'){
+                                console.log('user found in db');
+                                console.log('valid password');
+                            }
+                            
                             return done(null, user);
                         }
                         // password check 'NOT OK'
                         // local strategy returned false
                         else {
-                            console.log('invalid password');
+                            if(envs.NODE_ENV === 'development'){
+                                console.log('user found in db');
+                                console.log('invalid password');
+                            }
                             errorObj["reason"] = "invalid password";
                             return done(errorObj, null);
                         }
@@ -64,7 +76,9 @@ module.exports.makePassportAuth = function(){
                 // user not found
                 // local strategy returned false
                 else {
-                    console.log('user not found in db');
+                    if(envs.NODE_ENV === 'development'){
+                        console.log('user not found in db');
+                    }
                     errorObj["reason"] = "invalid credential";
                     return done(errorObj, null);
                 }
