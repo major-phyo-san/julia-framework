@@ -40,7 +40,6 @@ module.exports.login = function(req, res, next){
           res.status(401).send(error);          
         }
         else{
-          console.log('rendering error page');
           res.status(401).render('errorpages/error', error);
         }
         
