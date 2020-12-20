@@ -4,22 +4,22 @@
  * Module dependencies.
  */
 
-var app = require('../server');
-var debug = require('debug')('boilerplate:server');
-var cluster = require('cluster');
+const app = require('../server');
+const debug = require('debug')('boilerplate:server');
+const cluster = require('cluster');
 
 // environment variables
-var envs = require('../config/server-env');
+const envs = require('../config/server-env');
 
 /**
  * Get host and port from environment and set the application url in Express.
  */
 
-var port = normalizePort(envs.NODE_PORT || '3000');
-var host = envs.NODE_HOST || 'localhost';
+const port = normalizePort(envs.NODE_PORT || '3000');
+const host = envs.NODE_HOST || 'localhost';
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -43,7 +43,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
+  const bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
@@ -68,8 +68,8 @@ function onError(error) {
 
 function onListening() {
   //var addr = server.address();
-  var addr = host;
-  var bind = typeof addr === 'string'
+  const addr = host;
+  const bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
@@ -77,7 +77,7 @@ function onListening() {
 
 // start the server
 function startServer(port, host){
-  var url = envs.NODE_PROTOCOL + host + ':' + port;
+  const url = envs.NODE_PROTOCOL + host + ':' + port;
   app.set('url', url);
   /**
    * Create HTTP server.
@@ -92,8 +92,7 @@ function startServer(port, host){
     console.log('Server running in ' + app.get('env') + ' mode on ' + app.get('url'));
   });
   app.server.on('error', onError);
-  app.server.on('listening', onListening);
-  
+  app.server.on('listening', onListening);  
 }
 
 // start the server on every CPU core
@@ -105,12 +104,17 @@ function startServerInCluster(){
 
     // log the disconnected worker, it will then be existed from the cluster
     cluster.on('disconnect', function(worker){
-      console.log('CLUSTER: worker %d disconnected from the cluster', worker.id);
+      if(envs.NODE_ENV === 'development'){
+        console.log(`CLUSTER: worker ${worker.id} disconnected from the cluster`);
+      }
     });
 
     // an old worker dies (exits) from the cluster
     cluster.on('exit', function(worker, code, signal){
-      console.log('CLUSTER: worker %d died with exit code %d (%s)', worker.id, code, signal);
+      if(envs.NODE_ENV === 'development'){
+        console.log(`CLUSTER: worker ${worker.id} died with exit code ${code} ${signal}`);
+      }
+
       // a new worker is created to replace it
       startWorker();
     });
@@ -124,8 +128,10 @@ function startServerInCluster(){
 
 // create a worker in the cluster
 function startWorker(){
-  var worker = cluster.fork();
-  console.log('CLUSTER: worker %d started', worker.id);
+  const worker = cluster.fork();
+  if(envs.NODE_ENV === 'development'){
+    console.log(`CLUSTER: worker ${worker.id} started`);
+  }
 }
 
 if(process.argv[2] === 'cluster'){
