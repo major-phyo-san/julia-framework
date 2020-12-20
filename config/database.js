@@ -2,10 +2,10 @@
 // created on 2020-11-08
 // modified on 2020-12-01
 
-var mongoose = require('mongoose');
-var envs = require('./server-env');
+const mongoose = require('mongoose');
+const envs = require('./server-env');
 
-var connection = null;
+const connection = null;
 
 module.exports.makeMongoDBConnection = function(optionalConnectionString, serverOptions){
     // MongoDB server credentials from environment variables

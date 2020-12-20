@@ -9,7 +9,7 @@ const FileStore = require('session-file-store')(session);
 const sessionStorageDir = './storage/framework/sessions';
 
 module.exports.makeMemorySessions = function(){
-    var memorySession = session({
+    const memorySession = session({
         genid: function(req){
             sessionId = stringGenerators.generateUUID();
             return sessionId; // use UUIDs for session Ids
@@ -23,7 +23,7 @@ module.exports.makeMemorySessions = function(){
 }
 
 module.exports.makeFileSessions = function() {
-    var fileSession = session({
+    const fileSession = session({
         genid: function(req){
             sessionId = stringGenerators.generateUUID();
             return sessionId; // use UUIDs for session Ids
