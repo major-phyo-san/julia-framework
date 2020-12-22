@@ -55,7 +55,7 @@ module.exports.login = function(req, res, next){
             res.status(200).send(jsonRes);
           }
           else{
-            res.redirect(200, '/');
+            res.redirect('/');
           }
         });
       }
