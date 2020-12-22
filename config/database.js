@@ -5,7 +5,7 @@
 const mongoose = require('mongoose');
 const envs = require('./server-env');
 
-const connection = null;
+var connection = null;
 
 module.exports.makeMongoDBConnection = function(optionalConnectionString, serverOptions){
     // MongoDB server credentials from environment variables
