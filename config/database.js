@@ -5,8 +5,6 @@
 const mongoose = require('mongoose');
 const envs = require('./server-env');
 
-var connection = null;
-
 module.exports.makeMongoDBConnection = function(optionalConnectionString, serverOptions){
     // MongoDB server credentials from environment variables
     const primaryConnectionString = envs.DB_CONNECTION + envs.DB_USERNAME + ':' + envs.DB_PASSWORD + '@' + envs.DB_HOST + ':' + envs.DB_PORT + '/' + envs.DB_DATABASE + '?';
@@ -18,6 +16,4 @@ module.exports.makeMongoDBConnection = function(optionalConnectionString, server
     }, function(error){
         connection = null;
     });
-
-    return connection;
 }
