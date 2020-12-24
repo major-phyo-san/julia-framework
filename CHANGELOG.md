@@ -87,3 +87,4 @@
 - Refactored config files
 - Fixed async connect() of makeMongoDBConnection() of database module
 - Added api authentication in auth module using JWT
+- Fixed API routes from checking CSRF token
