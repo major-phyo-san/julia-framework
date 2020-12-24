@@ -9,6 +9,8 @@ const User = require('../app/models/User');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
+const jwt = require('jsonwebtoken');
+
 var optionalConnectionString = {
     authSource: 'admin',
     compressors: 'zlib',
@@ -111,4 +113,46 @@ module.exports.makePassportAuth = function(){
     });
 
     return passport;
+}
+
+module.exports.makeJWTAuth = function(req, res){
+    const email = req.body.email;
+    const password = req.body.password;
+    User.findOne({email: email}, function(err, user){
+        var errorObj = {"message": "failed to authenticate user"};
+        if (err) {
+            if(envs.NODE_ENV === 'development'){
+                console.log('error occurred in authentication database');
+            } 
+            
+            errorObj["reason"] = "auth db err";
+            res.status(500).send(errorObj);
+        }
+        if(user){
+            cryptography.debcrypt(password, user.password, function(match){
+                if (match) {
+                    if(envs.NODE_ENV === 'development'){
+                        console.log('user found in db');
+                        console.log('valid password');
+                    }
+                    const jwtSignOptions = {
+                        expiresIn: "1h"
+                    };
+                    jwt.sign(user, envs.NODE_KEY, jwtSignOptions, function(err, token){
+                        res.status(200).send({"message": "authenticated", "token": token});
+                    });
+                }
+
+                else {
+                    if(envs.NODE_ENV === 'development'){
+                        console.log('user found in db');
+                        console.log('invalid password');
+                    }
+                    errorObj["reason"] = "invalid password";
+                    res.status(401).send(errorObj);
+                }
+
+            });
+        }
+    });
 }
