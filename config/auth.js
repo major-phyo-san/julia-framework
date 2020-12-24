@@ -20,7 +20,7 @@ var serverOptions = {
     useUnifiedTopology: true
 };
 
-const connection = database.makeMongoDBConnection(optionalConnectionString, serverOptions);
+database.makeMongoDBConnection(optionalConnectionString, serverOptions);
 
 module.exports.makePassportAuth = function(){
     passport.use('local', new LocalStrategy(
