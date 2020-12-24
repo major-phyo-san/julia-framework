@@ -101,6 +101,12 @@ app.use(express.urlencoded({ extended: false }));
 // encrypt cookies with NODE_KEY key from env
 app.use(cookieParser(envs.NODE_KEY));
 
+// exclude api routes from checking CSRF
+// import api routes
+const apiRouter = require('./routes/api');
+// use api routes
+app.use(apiRouter);
+
 // add CSRF token guard to app
 // check for value in '_csrf' attribute of hidden inputs
 app.use(csrfGuard({cookie: true}));
@@ -138,13 +144,11 @@ app.get('/public*', function(req, res){
 //=======================================================//
 // routing section
 
-// import routes
+// import web routes
 const webRouter = require('./routes/web');
-const apiRouter = require('./routes/api');
 
-// use routes
+// use web routes
 app.use(webRouter);
-app.use(apiRouter);
 
 //=======================================================//
 
