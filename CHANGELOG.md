@@ -70,17 +70,20 @@
 0.0.9 (2020-12-16)
 - Added session module
 - Added auth module
+- Added web authentication in auth module using Passport
 - Refactored default error view
 - Refactored default error handler middlewares
 - Added default User model and schema
 - Added default auth views (Login and Register views)
-- Added default auth controllers (Login and Register controllers)
+- Added default auth controllers for web (Login and Register controllers)
 - Added '/sessions' dir for storing file-based session files
 - Added nodemon config file
 - Deleted default user controller
 - Fixed default web routes
 
-0.1.0 (2020-12-20)
+0.1.0 (2020-12-24)
 - Refactored server.js
 - Refactored www
 - Refactored config files
+- Fixed async connect() of makeMongoDBConnection() of database module
+- Added api authentication in auth module using JWT
