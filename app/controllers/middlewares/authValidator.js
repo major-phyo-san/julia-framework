@@ -1,3 +1,4 @@
+const envs = require('../../../config/server-env');
 const jwt = require('jsonwebtoken');
 
 module.exports.validateAPIUser = function(req, res, next){
