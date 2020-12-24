@@ -14,7 +14,7 @@ var serverOptions = {
     useUnifiedTopology: true
 };
 
-const connection = database.makeMongoDBConnection(optionalConnectionString, serverOptions);
+database.makeMongoDBConnection(optionalConnectionString, serverOptions);
 
 var renderContext = {
     appName: envs.NODE_NAME,
