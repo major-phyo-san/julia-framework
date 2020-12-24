@@ -138,7 +138,7 @@ module.exports.makeJWTAuth = function(req, res){
                     const jwtSignOptions = {
                         expiresIn: "1h"
                     };
-                    jwt.sign(user, envs.NODE_KEY, jwtSignOptions, function(err, token){
+                    jwt.sign(user.toJSON(), envs.NODE_KEY, jwtSignOptions, function(err, token){                        
                         res.status(200).send({"message": "authenticated", "token": token});
                     });
                 }
