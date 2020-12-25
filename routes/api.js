@@ -6,17 +6,18 @@ var auth = require('../config/auth');
 var authValidator = require('../app/controllers/middlewares/authValidator');
 
 /* GET api index page. */
-router.get('/api', function(req, res, next) {
+router.get('/api', function(req, res) {
     res.set({
-        'Content-Type': 'application/json',
-        'Content-Length': '122'
-    }).send({message: 'welcome'});    
+        'Content-Type': 'application/json'
+    }).send({"message": 'welcome'});
 });
 
-router.post('/api/login', auth.makeJWTAuth);
-
+/* protected route to test auth validator */
 router.get('/api/protected', authValidator.validateAPIUser, function(req, res){
     res.send({"message": "authenticated user"});
 });
+
+/* API authentication route */
+router.post('/api/login', auth.makeJWTAuth);
 
 module.exports = router;
