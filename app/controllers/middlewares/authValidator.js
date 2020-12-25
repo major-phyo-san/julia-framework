@@ -19,3 +19,12 @@ module.exports.validateAPIUser = function(req, res, next){
         }
     });
 }
+
+module.exports.validateWebUser = function(req, res, next){
+    if(req.user){
+        next();
+    }
+    else{
+        res.render('errorpages/error', {"errorCode": "403", "errorMessage": "not authenticated"});
+    }
+}
