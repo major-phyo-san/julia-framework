@@ -81,10 +81,12 @@
 - Deleted default user controller
 - Fixed default web routes
 
-0.1.0 (2020-12-24)
+0.1.0 (2020-12-25)
 - Refactored server.js
 - Refactored www
 - Refactored config files
 - Fixed async connect() of makeMongoDBConnection() of database module
 - Added api authentication in auth module using JWT
+- Added auth vaidator middleware for API and Web
+- Added auth test routes for API and Web
 - Fixed API routes from checking CSRF token
