@@ -3,7 +3,12 @@
 // created on 10-12-2020
 
 const crypto = require('crypto');
-const bcrypt = require('bcrypt');
+try{
+    const bcrypt = require('bcrypt');
+}
+catch(error){
+    const bcrypt = require('bcryptjs');
+}
 
 // base64digest() function takes a String parameter
 // and return based64 digested form
