@@ -90,3 +90,8 @@
 - Added auth vaidator middleware for API and Web
 - Added auth test routes for API and Web
 - Fixed API routes from checking CSRF token
+
+0.1.1 (2020-12-26)
+- Re-structured controllers and middlewares in 'app/http' directory
+- Fixed imports to accommodate 'app/http' directory
+- Added 'app/events' directory
