@@ -1,6 +1,6 @@
-var envs = require('../../../config/server-env');
-var database = require('../../../config/database');
-var auth = require('../../../config/auth');
+var envs = require('../../../../config/server-env');
+var database = require('../../../../config/database');
+var auth = require('../../../../config/auth');
 var passport = auth.makePassportAuth();
 
 var optionalConnectionString = {

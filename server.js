@@ -61,7 +61,7 @@ if(app.get('env') === 'production'){
 //=======================================================//
 
 // deal with uncaught error
-const handlerUncaught = require('./app/controllers/middlewares/ErrorHandlers/uncaughtErrorHandler');
+const handlerUncaught = require('./app/http/middlewares/ErrorHandlers/uncaughtErrorHandler');
 app.use(handlerUncaught);
 
 //=======================================================//
@@ -155,8 +155,8 @@ app.use(webRouter);
 //=======================================================//
 // error handling section
 
-const handler404 = require('./app/controllers/middlewares/ErrorHandlers/notFoundErrorHandler');
-const handlerGeneral = require('./app/controllers/middlewares/ErrorHandlers/generalErrorHandler');
+const handler404 = require('./app/http/middlewares/ErrorHandlers/notFoundErrorHandler');
+const handlerGeneral = require('./app/http/middlewares/ErrorHandlers/generalErrorHandler');
 
 // catch 404 and render the error page
 app.use(handler404);

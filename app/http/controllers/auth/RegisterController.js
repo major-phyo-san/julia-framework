@@ -1,7 +1,7 @@
-var envs = require('../../../config/server-env');
-var database = require('../../../config/database');
-var cryptography = require('../../../utilities/cryptography');
-var User = require('../../models/User');
+var envs = require('../../../../config/server-env');
+var database = require('../../../../config/database');
+var cryptography = require('../../../../utilities/cryptography');
+var User = require('../../../models/User');
 
 var optionalConnectionString = {
     authSource: 'admin',

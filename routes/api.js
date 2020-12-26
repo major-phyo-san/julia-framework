@@ -3,7 +3,7 @@ var router = express.Router();
 
 var auth = require('../config/auth');
 
-var authValidator = require('../app/controllers/middlewares/authValidator');
+var authValidator = require('../app/http/middlewares/authValidator');
 
 /* GET api index page. */
 router.get('/api', function(req, res) {

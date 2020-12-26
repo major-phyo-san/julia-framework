@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var authValidator = require('../app/controllers/middlewares/authValidator');
+var authValidator = require('../app/http/middlewares/authValidator');
 
-var LoginController = require('../app/controllers/auth/LoginController');
-var RegisterController = require('../app/controllers/auth/RegisterController');
+var LoginController = require('../app/http/controllers/auth/LoginController');
+var RegisterController = require('../app/http/controllers/auth/RegisterController');
 
 /* GET home page. */
 router.get('/', function(req, res) {
