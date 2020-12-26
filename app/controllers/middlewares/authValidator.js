@@ -2,7 +2,7 @@ const envs = require('../../../config/server-env');
 const jwt = require('jsonwebtoken');
 
 module.exports.validateAPIUser = function(req, res, next){
-    const authHeader = req.headers["authorization"];
+    const authHeader = req.headers["Authorization"];
     if (!authHeader) {
         res.status(401).send({ "message": "not authenticated", "reason": "authorization header not present" });
     }
