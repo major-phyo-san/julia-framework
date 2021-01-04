@@ -36,29 +36,38 @@ module.exports.login = function(req, res, next){
       if(err){
         // the user is not authenticated
         var error = {errorMessage: err.reason, errorCode: "401"};
-        if(req.accepts() == 'application/json'){
-          res.status(401).send(error);          
-        }
-        else{
-          res.status(401).render('errorpages/error', error);
-        }
-        
+        res.status(401).render('errorpages/error', error);
       }
-      else{
+      else {
         // the user is authenticated
         // passport is establishing a login session
-        req.login(user, function(err){
-          // login operation completed
-          // user will be assigned to req.user
-          var jsonRes = {"message": "you were authenticated and logged in"};
-          if(req.accepts() == 'application/json'){
-            res.status(200).send(jsonRes);
+        req.login(user, function (err) {
+          if (user) {
+            // login operation completed
+            // user will be assigned as req.passport.user
+            req.session.passport = { "user": user._id.toString() };
+            req.session.save(function (err) {
+              if (err) {
+                // error occurred on saving user object in passport
+                res.redirect('/login');
+              }
+              // redirect to wherever the authenticated user should be redirected
+              res.redirect('/');
+            });
           }
-          else{
-            res.redirect('/');
+          if (err) {
+            // login operation not completed
+            // there was no user object
+            res.redirect('/login');
           }
         });
       }
-      
     })(req, res, next);
+}
+
+module.exports.logout = function(req, res){
+  req.logout();
+  req.session.regenerate(function(err){
+    res.redirect('/login');
+  });
 }
