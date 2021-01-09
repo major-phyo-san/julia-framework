@@ -50,7 +50,11 @@ app.set('views', path.join(__dirname, '/app/views'));
 app.engine('hbs', hbs({  
   layoutsDir:path.join(__dirname, '/app/views/layouts'), 
   defaultLayout:'main',
-  extname:'.hbs'
+  extname:'.hbs',
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true
+  }
 }));
 
 // cache templates in production
