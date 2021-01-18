@@ -126,7 +126,16 @@ module.exports.makeJWTAuth = function(req, res){
             } 
             
             errorObj["reason"] = "auth db err";
+            errorObj["token"] = null;
             res.status(500).send(errorObj);
+        }
+        if(!user){
+            if(envs.NODE_ENV === 'development'){
+                console.log('user not found in db');
+            }
+            errorObj["reason"] = "invalid credential";
+            errorObj["token"] = "";
+            res.status(401).send(errorObj);
         }
         if(user){
             cryptography.debcrypt(password, user.password, function(match){
@@ -149,6 +158,7 @@ module.exports.makeJWTAuth = function(req, res){
                         console.log('invalid password');
                     }
                     errorObj["reason"] = "invalid password";
+                    errorObj["token"] = "";
                     res.status(401).send(errorObj);
                 }
 
