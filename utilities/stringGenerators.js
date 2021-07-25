@@ -22,3 +22,8 @@ module.exports.generateRandomString = function (length) {
 module.exports.generateUUID = function(){
    return uuid.v4();
 }
+
+// module to reverse strings
+module.exports.reverseString = function(str){
+    return str.split('').reverse().join('');
+}
