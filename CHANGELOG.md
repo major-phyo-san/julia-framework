@@ -96,3 +96,8 @@
 - Fixed imports to accommodate 'app/http' directory
 - Fixed LoginController
 - Fixed server.js for Handlebars denial of accessing 'not own property' of parent
+
+0.1.2 (2021-08-17)
+- Added CORS protection with cors
+- Added option to disable Etag
+- Added module to reverse string
