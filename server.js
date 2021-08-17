@@ -9,9 +9,10 @@ const express = require('express');
 const expressWs = require('express-ws');
 const handlebars = require('express-handlebars');
 
-// load cookie-parser, CSRF token guard (csurf) and method-override
+// load cookie-parser, CSRF token guard (csurf), cors and method-override
 const cookieParser = require('cookie-parser');
 const csrfGuard = require('csurf');
+const cors = require('cors');
 const methodOverride = require('method-override');
 
 // load web session and auth configs
@@ -31,6 +32,10 @@ const envs = require('./config/server-env');
 // initialize Express app and create server for the app
 const app = express();
 app.server = http.createServer(app);
+app.use(cors());
+
+// enable, disable Etag, default is enabled
+// app.disable('etag');
 
 // set app environment
 app.set('env', envs.NODE_ENV);
