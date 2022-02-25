@@ -1,0 +1,7 @@
+<form id='uploadForm' action='/upload' method='POST'
+    encType="multipart/form-data">
+    {{csrfToken}}
+    <input type="hidden" name="_csrf" value="{{{csrfToken}}}"/>
+    <input type="file" name="sampleFile" />
+    <input type='submit' value='Upload!' />
+</form>
